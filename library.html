@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+
+
+function Book(title, author) {
+  this.title = title;
+  this.author = author;
+  this.isAvailable = true;
+}
+
+// Create an array to store the books.
+const library = [];
+
+// 2. Create a function called `addBook` that adds a new book object to the array of books.
+function addBook(title, author) {
+  const newBook = new Book(title, author);
+  library.push(newBook);
+}
+
+// 3. Create a function called `borrowBook` that updates the `isAvailable` property to `false`.
+function borrowBook(title) {
+  const book = findBookByTitle(title);
+  if (book) {
+    if (book.isAvailable) {
+      book.isAvailable = false;
+      console.log(`${title} has been borrowed.`);
+    } else {
+      console.log(`${title} is not available.`);
+    }
+  } else {
+    console.log(`${title} not found in the library.`);
+  }
+}
+
+// 4. Create a function called `returnBook` that updates the `isAvailable` property to `true`.
+function returnBook(title) {
+  const book = findBookByTitle(title);
+  if (book) {
+    if (!book.isAvailable) {
+      book.isAvailable = true;
+      console.log(`${title} has been returned.`);
+    } else {
+      console.log(`${title} is already available.`);
+    }
+  } else {
+    console.log(`${title} not found in the library.`);
+  }
+}
+
+// Helper function to find a book by title.
+function findBookByTitle(title) {
+  return library.find(book => book.title === title);
+}
+
+// 5. Create a function called `listBooks` that lists all books in the library.
+function listBooks() {
+  console.log("Library Books:");
+  library.forEach(book => {
+    console.log(`Title: ${book.title}, Author: ${book.author}, Available: ${book.isAvailable ? 'Yes' : 'No'}`);
+  });
+}
+
+// Adding some books to the library.
+addBook("The Hobbit", "J.R.R. Tolkien");
+addBook("Harry Potter and the Sorcerer's Stone", "J.K. Rowling");
+
+
+
+
+// Borrowing a book.
+borrowBook("The Hobbit");
+
+// Listing all books.
+listBooks();
+
+// Returning a book.
+returnBook("The Hobbit");
+
+// Listing all books again.
+listBooks();
+
+    </script>
+</body>
+</html>
